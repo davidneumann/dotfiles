@@ -4,3 +4,6 @@
 [submodule "tmuxconf"]
 	path = tmuxconf
 	url = git@github.com:davidneumann/tmuxconf.git
+[submodule "gitconfig"]
+	path = gitconfig
+	url = git@github.com:davidneumann/gitconfig.git

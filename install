@@ -3,6 +3,11 @@
 cd vimrc
 ./install
 cd ../
+
 cd tmuxconf
+./install
+cd ../
+
+cd gitconfig
 ./install
 cd ../
