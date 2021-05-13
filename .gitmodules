@@ -1,3 +1,6 @@
 [submodule "vimrc"]
 	path = vimrc
 	url = git@github.com:davidneumann/vimrc.git
+[submodule "tmuxconf"]
+	path = tmuxconf
+	url = git@github.com:davidneumann/tmuxconf.git
