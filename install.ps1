@@ -18,14 +18,6 @@ if (!(Get-Command "wt.exe" -errorAction SilentlyContinue)) {
 	choco install microsoft-windows-terminal
 }
 
-#Use bash style tab completion
-echo "Setting bash style tab completion"
-Set-PSReadlineKeyHandler -Key Tab -Function Complete
-
-#Disable bell
-echo "Disabling bell"
-Set-PSReadlineOption -BellStyle None
-
 # Download font. TODO
 echo "Downloading and installing Meslo font"
 if (!(Test-Path ~\Downloads\Meslo.zip)) {
