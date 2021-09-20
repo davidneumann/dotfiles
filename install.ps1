@@ -1,18 +1,22 @@
 #Install choco
-if (!(choco install microsoft-windows-terminal)) {
-	echo "Installing choco"
+if (!(Get-Command "choco" -errorAction SilentlyContinue)) {
+	echo "You need to install choco from either https://chocolatey.org/install or run .\windows\install_choco.ps1 as admin"
+	exit
 	#TODO figure out how to start .\windows\install_choco.ps1 as admin
 }
 
 #Install scoop
 if (!(Get-Command "scoop" -errorAction SilentlyContinue)) {
-	echo "Installing scoop"
+	echo "You need to install scoop: https://scoop.sh/ or use .\windows\install_scoop.ps1 as an admin"
+	exit
 	#TODO figure out how to start .\windows\install_scoop.ps1 as admin
 }
 
 #install windows terminal
-#TODO figure out how to tell if this is already installed
-#choco install microsoft-windows-terminal
+if (!(Get-Command "wt.exe" -errorAction SilentlyContinue)) {
+	echo "Installing choco with 'choco install microsoft-windows-terminal'"
+	choco install microsoft-windows-terminal
+}
 
 #Use bash style tab completion
 echo "Setting bash style tab completion"
