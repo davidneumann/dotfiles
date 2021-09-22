@@ -16,6 +16,7 @@ if (!(Get-Command "scoop" -errorAction SilentlyContinue)) {
 if (!(Get-Command "wt.exe" -errorAction SilentlyContinue)) {
 	echo "Installing choco with 'choco install microsoft-windows-terminal'"
 	choco install microsoft-windows-terminal
+    exit
 }
 
 # Download font. TODO
