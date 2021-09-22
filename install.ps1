@@ -20,12 +20,15 @@ if (!(Get-Command "wt.exe" -errorAction SilentlyContinue)) {
 
 # Download font. TODO
 echo "Downloading and installing Meslo font"
+$fontSourceFolder = "$HOME\Downloads\Meslo\"
 if (!(Test-Path ~\Downloads\Meslo.zip)) {
 	Invoke-WebRequest -Uri "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip" -Outfile ~/Downloads/Meslo.zip
 }
-if (!(Test-Path ~\Downloads\Meslo\)) {
-	Expand-Archive ~\Downloads\Meslo.zip -DestinationPath ~\Downloads\Meslo\
-	#Install the fonts. TODO https://stackoverflow.com/a/34802623 figure out how to do this
+if (!(Test-Path $fontSourceFolder)) {
+	Expand-Archive ~\Downloads\Meslo.zip -DestinationPath $fontSourceFolder
+    echo "Install all these fonts by hand. Select all -> right click -> install. Rerun install afterwards"
+    explorer "$fontSourceFolder"
+    exit
 }
 
 #Install posh / oh-my-posh
