@@ -38,3 +38,10 @@ Set-PoshPrompt -Theme emodipt
 cp windows\profile.ps1 $PROFILE
 
 ./set_terminal_settings.ps1
+
+
+# Run other installers
+$cd = $pwd
+cd vimrc
+./install.ps1
+cd $cd
