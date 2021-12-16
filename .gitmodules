@@ -7,3 +7,6 @@
 [submodule "gitconfig"]
 	path = gitconfig
 	url = git@github.com:davidneumann/gitconfig.git
+[submodule "dotfiles-vscode"]
+	path = dotfiles-vscode
+	url = git@github.com:davidneumann/dotfiles-vscode.git
