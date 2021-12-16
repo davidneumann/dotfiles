@@ -1,5 +1,9 @@
 #Setup zsh or bash completions
 if [[ $OSTYPE == 'darwin'* ]]; then
+    echo "Enable subpixel antialiasing for bad montiors"
+    defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
+    defaults -currentHost write -globalDomain AppleFontSmoothing -int 2
+
     echo "Enabling Ctrl + Cmd + Click window drag"
     defaults write -g NSWindowShouldDragOnGesture -bool true
 
