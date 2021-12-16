@@ -1,5 +1,8 @@
 #Setup zsh or bash completions
 if [[ $OSTYPE == 'darwin'* ]]; then
+    echo "Enabling Ctrl + Cmd + Click window drag"
+    defaults write -g NSWindowShouldDragOnGesture -bool true
+
     if [[ $SHELL == '/bin/zsh' ]]; then
         echo "Setting up fancy comnpletions for zsh"
         autoload -Uz compinit && compinit
