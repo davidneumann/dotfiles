@@ -11,3 +11,7 @@ cd ../
 cd gitconfig
 ./install
 cd ../
+
+if [[ $OSTYPE == 'darwin'* ]]; then
+    ./setup_macos.sh
+fi
