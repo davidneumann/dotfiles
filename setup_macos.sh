@@ -1,3 +1,6 @@
+#ensure .bashrc is read
+grep -qxF  "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" ~/.bash_profile || echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile
+
 #Add helpful brew stuff
 if ! command -v brew &> /dev/null
 then
