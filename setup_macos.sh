@@ -22,8 +22,8 @@ fi
 #Setup oh-my-posh
 if ! fc-list | grep "Meslo" &> /dev/null
 then
-    here=$(pwd)
     echo "Installing Meslo font"
+    here=$(pwd)
     # clone
     git clone https://github.com/powerline/fonts.git --depth=1 /tmp/fonts/
     # install
@@ -39,7 +39,12 @@ then
     echo "Installing oh-my-posh"
     brew tap jandedobbeleer/oh-my-posh
     brew install oh-my-posh
-    cp /usr/local/opt/oh-my-posh/themes/emodipt.omp.json ~/
+fi
+if command -v oh-my-posh &> /dev/null
+then
+    if [ ! -e "$HOME/emodipt.omp.json" ]; then
+        cp /usr/local/opt/oh-my-posh/themes/emodipt.omp.json ~/
+    fi
     posh_string='eval "$(oh-my-posh --init --shell bash --config ~/emodipt.omp.json)"'
     grep -qxF "$posh_string" ~/.bashrc || echo "$posh_string" >> ~/.bashrc
     . ~/.bashrc
