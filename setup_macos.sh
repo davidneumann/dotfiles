@@ -23,16 +23,12 @@ fi
 if ! fc-list | grep "Meslo" &> /dev/null
 then
     echo "Installing Meslo font"
-    here=$(pwd)
-    # clone
-    git clone https://github.com/powerline/fonts.git --depth=1 /tmp/fonts/
-    # install
-    cd /tmp/fonts/
-    ./install.sh
-    # clean-up a bit
-    cd ..
-    rm -rf fonts
-    cd $here
+    curl --silent -L "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Meslo.zip" -o /tmp/meslo.zip
+    unzip -o -a /tmp/meslo.zip -d /tmp/fonts/ > /dev/null
+    font_dir="$HOME/Library/Fonts"
+    find "/tmp/fonts/" \( -name "*.[ot]tf" -or -name "*.pcf.gz" \) -type f -print0 | xargs -0 -n1 -I % cp "%" "$font_dir/"
+    rm -rf /tmp/meslo.zip
+    rm -rf /tmp/fonts
 fi
 if ! command -v oh-my-posh  &> /dev/null
 then
@@ -42,10 +38,11 @@ then
 fi
 if command -v oh-my-posh &> /dev/null
 then
-    if [ ! -e "$HOME/emodipt.omp.json" ]; then
-        cp /usr/local/opt/oh-my-posh/themes/emodipt.omp.json ~/
+    posh_theme="atomic.omp.json"
+    if [ ! -e "$HOME/$posh_theme" ]; then
+        cp /usr/local/opt/oh-my-posh/themes/$posh_theme ~/
     fi
-    posh_string='eval "$(oh-my-posh --init --shell bash --config ~/emodipt.omp.json)"'
+    posh_string='eval "$(oh-my-posh --init --shell bash --config ~/'"$posh_theme"')"'
     grep -qxF "$posh_string" ~/.bashrc || echo "$posh_string" >> ~/.bashrc
     . ~/.bashrc
 fi
