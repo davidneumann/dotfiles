@@ -38,9 +38,9 @@ then
 fi
 if command -v oh-my-posh &> /dev/null
 then
-    posh_theme="atomic.omp.json"
+    posh_theme="myposh.omp.json"
     if [ ! -e "$HOME/$posh_theme" ]; then
-        cp /usr/local/opt/oh-my-posh/themes/$posh_theme ~/
+        ln -s $(pwd)/$posh_theme ~/$posh_theme
     fi
     posh_string='eval "$(oh-my-posh --init --shell bash --config ~/'"$posh_theme"')"'
     grep -qxF "$posh_string" ~/.bashrc || echo "$posh_string" >> ~/.bashrc
