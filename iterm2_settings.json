@@ -1,4 +1,6 @@
 {
+"Profiles": [
+{
   "Ansi 5 Color" : {
     "Red Component" : 0.96095067262649536,
     "Color Space" : "sRGB",
@@ -497,4 +499,6 @@
     "Alpha Component" : 1,
     "Green Component" : 0.7008507251739502
   }
+}
+]
 }
