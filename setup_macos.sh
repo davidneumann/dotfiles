@@ -16,7 +16,7 @@ fi
 if ! mdfind "kMDItemCFBundleIdentifier == com.googlecode.iterm2" &> /dev/null
 then
     echo "Installing iterm2"
-brew install --cask iterm2
+    brew install --cask iterm2
 fi
 
 #Setup oh-my-posh
