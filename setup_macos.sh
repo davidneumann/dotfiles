@@ -6,18 +6,20 @@ if ! command -v brew &> /dev/null
 then
     echo "Installing brew"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/david/.zprofile
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 brew tap homebrew/cask
-if ! command -v git &> /dev/null
-then
-    echo "Installing git"
-    brew install git
-fi
-if ! mdfind "kMDItemCFBundleIdentifier == com.googlecode.iterm2" &> /dev/null
-then
-    echo "Installing iterm2"
-    brew install --cask iterm2
-fi
+# if ! command -v git &> /dev/null
+# then
+#     echo "Installing git"
+#     brew install git
+# fi
+# if ! mdfind "kMDItemCFBundleIdentifier == com.googlecode.iterm2" &> /dev/null
+# then
+#     echo "Installing iterm2"
+#     brew install --cask iterm2
+# fi
 
 #Setup oh-my-posh
 if ! fc-list | grep "Meslo" &> /dev/null
@@ -42,9 +44,15 @@ then
     if [ ! -e "$HOME/$posh_theme" ]; then
         ln -s $(pwd)/$posh_theme ~/$posh_theme
     fi
-    posh_string='eval "$(oh-my-posh --init --shell bash --config ~/'"$posh_theme"')"'
-    grep -qxF "$posh_string" ~/.bashrc || echo "$posh_string" >> ~/.bashrc
-    . ~/.bashrc
+    if [[ $SHELL == '/bin/zsh' ]]; then
+        posh_string='eval "$(oh-my-posh --init --shell zsh --config ~/'"$posh_theme"')"'
+        grep -qxF "$posh_string" ~/.zshrc || echo "$posh_string" >> ~/.zshrc
+        source ~/.zshrc
+    else
+        posh_string='eval "$(oh-my-posh --init --shell bash --config ~/'"$posh_theme"')"'
+        grep -qxF "$posh_string" ~/.bashrc || echo "$posh_string" >> ~/.bashrc
+        . ~/.bashrc
+    fi
 fi
 
 #Setup zsh or bash completions
@@ -58,9 +66,9 @@ if [[ $OSTYPE == 'darwin'* ]]; then
 
     if [[ $SHELL == '/bin/zsh' ]]; then
         echo "Setting up fancy comnpletions for zsh"
-        autoload -Uz compinit && compinit
-        # git clone "https://github.com/scriptingosx/mac-zsh-completions.git" deps/mac-zsh-completions/
-        # echo "fpath=( ~/Projects/mac-zsh-completions/completions $fpath )" >> ~/.zshrc
+        # autoload -Uz compinit && compinit
+        git clone "https://github.com/scriptingosx/mac-zsh-completions.git" deps/mac-zsh-completions/
+        echo "fpath=( $(pwd)deps/mac-zsh-completions/ $fpath )" >> ~/.zshrc
     elif [[ $SHELL == '/bin/bash' ]]; then
         echo "Setting up fancy completions for bash"
         brew install bash-completion
