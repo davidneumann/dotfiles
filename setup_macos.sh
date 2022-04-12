@@ -68,7 +68,7 @@ if [[ $OSTYPE == 'darwin'* ]]; then
         echo "Setting up fancy comnpletions for zsh"
         # autoload -Uz compinit && compinit
         git clone "https://github.com/scriptingosx/mac-zsh-completions.git" deps/mac-zsh-completions/
-        echo "fpath=( $(pwd)deps/mac-zsh-completions/ $fpath )" >> ~/.zshrc
+        echo "fpath=( $(pwd)/deps/mac-zsh-completions/ $fpath )" >> ~/.zshrc
     elif [[ $SHELL == '/bin/bash' ]]; then
         echo "Setting up fancy completions for bash"
         brew install bash-completion
