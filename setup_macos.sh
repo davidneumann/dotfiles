@@ -1,15 +1,16 @@
 #ensure .bashrc is read
-grep -qxF  "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" ~/.bash_profile || echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile
+# grep -qxF  "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" ~/.bash_profile || echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile
 
 #Add helpful brew stuff
-if ! command -v brew &> /dev/null
-then
-    echo "Installing brew"
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/david/.zprofile
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-brew tap homebrew/cask
+# if ! command -v brew &> /dev/null
+# then
+#     echo "Installing brew"
+#     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+#     echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/david/.zprofile
+#     eval "$(/opt/homebrew/bin/brew shellenv)"
+# fi
+# brew tap homebrew/cask
+
 # if ! command -v git &> /dev/null
 # then
 #     echo "Installing git"
@@ -22,7 +23,7 @@ brew tap homebrew/cask
 # fi
 
 #Setup oh-my-posh
-if ! fc-list | grep "Meslo" &> /dev/null
+if ! system_profiler SPFontsDataType | grep "Meslo" &> /dev/null
 then
     echo "Installing Meslo font"
     curl --silent -L "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Meslo.zip" -o /tmp/meslo.zip
@@ -68,7 +69,7 @@ if [[ $OSTYPE == 'darwin'* ]]; then
         echo "Setting up fancy comnpletions for zsh"
         # autoload -Uz compinit && compinit
         git clone "https://github.com/scriptingosx/mac-zsh-completions.git" deps/mac-zsh-completions/
-        echo "fpath=( $(pwd)/deps/mac-zsh-completions/ $fpath )" >> ~/.zshrc
+        echo "\nfpath=( $(pwd)/deps/mac-zsh-completions/ $fpath )" >> ~/.zshrc
     elif [[ $SHELL == '/bin/bash' ]]; then
         echo "Setting up fancy completions for bash"
         brew install bash-completion
