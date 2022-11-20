@@ -1,5 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 2,
+  "final_space": true,
   "blocks": [
     {
       "type": "prompt",
@@ -10,78 +12,78 @@
           "style": "diamond",
           "foreground": "#cecece",
           "background": "#143466",
-          "leading_diamond": "\uE0B6"
+          "leading_diamond": "\ue0b6",
+          "template": " {{ if .WSL }}WSL at {{ end }}{{.Icon}} "
         },
         {
           "type": "session",
           "style": "powerline",
           "foreground": "#cecece",
           "background": "#143466",
-          "properties": {
-            "template": "{{ .UserName }} {{ .ComputerName }}"
-          }
+          "template": " {{ .UserName }} {{ .HostName }} "
         },
         {
           "type": "path",
           "style": "powerline",
-          "powerline_symbol": "\uE0B0",
+          "powerline_symbol": "\ue0b0",
           "foreground": "#cecece",
           "background": "#852250",
+          "template": " \ue5ff {{ .Path }} ",
           "properties": {
-            "prefix": " \uE5FF ",
             "style": "full"
           }
         },
         {
           "type": "time",
           "style": "powerline",
-          "powerline_symbol": "\uE0B0",
+          "powerline_symbol": "\ue0b0",
           "foreground": "#cecece",
           "background": "#275e29",
+          "template": " {{ .CurrentDate | date .Format }} ",
           "properties": {
             "time_format": "2006-01-02 15:04:05"
           }
         },
-
         {
           "type": "git",
           "style": "powerline",
-          "powerline_symbol": "\uE0B0",
+          "powerline_symbol": "\ue0b0",
           "foreground": "#cecece",
           "background": "#68660a",
+          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{ if gt .StashCount 0 }} \uf692 {{ .StashCount }}{{ end }} ",
           "properties": {
             "fetch_stash_count": true,
-            "fetch_upstream_icon": true,
-            "template": "{{ .UpstreamIcon }}{{ .HEAD }}{{ if gt .StashCount 0 }} \uF692 {{ .StashCount }}{{ end }}"
+            "fetch_upstream_icon": true
           }
         },
         {
           "type": "node",
           "style": "powerline",
-          "powerline_symbol": "\uE0B0",
+          "powerline_symbol": "\ue0b0",
           "foreground": "#cecece",
           "background": "#6CA35E",
-          "properties": {
-            "prefix": " \uE718 "
-          }
+          "template": " \ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} "
         },
         {
           "type": "root",
           "style": "powerline",
-          "powerline_symbol": "\uE0B0",
+          "powerline_symbol": "\ue0b0",
           "foreground": "#193549",
-          "background": "#ffff66"
+          "background": "#ffff66",
+          "template": " \uf0e7 "
         },
         {
           "type": "exit",
           "style": "diamond",
           "foreground": "#cecece",
           "background": "#2e9599",
-          "background_templates": ["{{ if gt .Code 0 }}#f1184c{{ end }}"],
-          "leading_diamond": "<transparent,background>\uE0B0</>",
-          "trailing_diamond": "\uE0B4",
+          "background_templates": [
+            "{{ if gt .Code 0 }}#f1184c{{ end }}"
+          ],
+          "leading_diamond": "<transparent,background>\ue0b0</>",
+          "trailing_diamond": "\ue0b4",
+          "template": " \uf7d4 ",
           "properties": {
-            "template": "\uF7d4",
             "always_enabled": true
           }
         }
@@ -90,19 +92,15 @@
     {
       "type": "prompt",
       "alignment": "left",
-      "newline": true,
       "segments": [
         {
           "type": "text",
           "style": "plain",
           "foreground": "#f1184c",
-          "properties": {
-            "prefix": "",
-            "text": "$"
-          }
+          "template": "$ "
         }
-      ]
+      ],
+      "newline": true
     }
-  ],
-  "final_space": true
+  ]
 }
