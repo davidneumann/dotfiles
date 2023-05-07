@@ -13,3 +13,6 @@
 [submodule "dotfiles-macos-iterm2"]
 	path = dotfiles-macos-iterm2
 	url = git@github.com:davidneumann/dotfiles-macos-iterm2.git
+[submodule "nvimrc"]
+	path = nvimrc
+	url = git@github.com:davidneumann/nvimrc.git
