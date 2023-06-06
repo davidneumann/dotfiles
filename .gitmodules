@@ -16,3 +16,6 @@
 [submodule "nvimrc"]
 	path = nvimrc
 	url = git@github.com:davidneumann/nvimrc.git
+[submodule "suckless"]
+	path = suckless
+	url = git@github.com:davidneumann/suckless.git
