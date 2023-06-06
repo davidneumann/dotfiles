@@ -5,7 +5,7 @@
 # cd ../
 
 cd nvimrc
-./install
+./install.sh
 cd ../
 
 cd tmuxconf
@@ -13,7 +13,7 @@ cd tmuxconf
 cd ../
 
 cd wezterm
-./isntall
+./install.sh
 cd ../
 
 # cd gitconfig
@@ -23,6 +23,17 @@ cd ../
 if [[ $OSTYPE == 'darwin'* ]]; then
     ./setup_macos.sh
 fi
+
+# Make symlink for .xprofile
+if [ -f $HOME/.xprofile ]; then
+    echo "Backing up .xprofile to .xprofile.bak"
+    if [ -f $HOME/.xprofile.bak ]; then
+      rm $HOME/.xprofile.bak
+    fi
+    cp -L $HOME/.xprofile $HOME/.xprofile.bak
+    rm $HOME/.xprofile
+fi
+ln -s $PWD/xprofile $HOME/.xprofile
 
 
 echo "Considering installing the following:"
