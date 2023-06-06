@@ -1,6 +1,10 @@
 #/bin/sh
 
-cd vimrc
+# cd vimrc
+# ./install
+# cd ../
+
+cd nvimrc
 ./install
 cd ../
 
@@ -8,10 +12,18 @@ cd tmuxconf
 ./install
 cd ../
 
-cd gitconfig
-./install
+cd wezterm
+./isntall
 cd ../
+
+# cd gitconfig
+# ./install
+# cd ../
 
 if [[ $OSTYPE == 'darwin'* ]]; then
     ./setup_macos.sh
 fi
+
+
+echo "Considering installing the following:"
+echo "  - ./gitconfig/install"
