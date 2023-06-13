@@ -16,6 +16,10 @@ cd wezterm
 ./install.sh
 cd ../
 
+cd zsh
+./install
+cd ../
+
 # cd gitconfig
 # ./install
 # cd ../
