@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ -e "$HOME/.zshrc" ]; then
+  echo "Zshrc File exists. Deleting"
+  cp -L "$HOME/.zshrc" "$HOME/.zshrc.back"
+  rm "$HOME/.zshrc"
+fi
+ln -s "$(pwd)/zshrc" "$HOME/.zshrc"
+
+mkdir -p "$HOME/.config/zsh"
+ln -s "$(pwd)/per-directory-history.zsh" "$HOME/.config/zsh/per-directory-history.zsh"

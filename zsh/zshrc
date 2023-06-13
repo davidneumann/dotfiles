@@ -1,0 +1,56 @@
+PATH="$PATH:/home/bytientdavid/.local/bin"
+PATH="$PATH:/home/bytientdavid/.local/lib/lua/bin"
+PATH="$PATH:/home/bytientdavid/.local/scripts"
+
+export EDITOR="nvim"
+
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/bytientdavid/.zshrc'
+
+#alias ls='ls -G'
+#alias ll='ls -lG'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+
+bindkey -e
+bindkey '^H' backward-kill-word
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
+# End of lines configured by zsh-newuser-install
+
+eval "$(oh-my-posh --init --shell zsh --config /home/bytientdavid/Source/dotfiles/myposh.omp.json)"
+
+source /home/bytientdavid/Source/ls_colors/lscolors.sh
+alias ls='ls --color=auto'
+
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# alias luamake=/home/bytientdavid/Downloads/lua-language-server/3rd/luamake/luamake
+
+alias vim=nvim
+
+alias jdone='notify-send "Jobs done" && echo -ne "\007"'
+
+source "$HOME/.cargo/env"
+source /usr/share/nvm/init-nvm.sh
+
+
+# History stuff
+# Write to history immediately
+setopt inc_append_history
+# History shared among terminals
+setopt share_history
+# Save extended info in history
+setopt extended_history
+# Ignore duplicates
+setopt hist_ignoredups
+# Per directory history
+source ~/.config/zsh/per-directory-history.zsh
