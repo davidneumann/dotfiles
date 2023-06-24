@@ -1,11 +1,11 @@
-PATH="$PATH:/home/bytientdavid/.local/bin"
-PATH="$PATH:/home/bytientdavid/.local/lib/lua/bin"
-PATH="$PATH:/home/bytientdavid/.local/scripts"
+PATH="$PATH:$HOME/.local/bin"
+PATH="$PATH:$HOME/.local/lib/lua/bin"
+PATH="$PATH:$HOME/.local/scripts"
 
 export EDITOR="nvim"
 
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/bytientdavid/.zshrc'
+zstyle :compinstall filename '$HOME/.zshrc'
 
 #alias ls='ls -G'
 #alias ll='ls -lG'
@@ -25,15 +25,15 @@ bindkey "^[[1;5D" backward-word
 
 # End of lines configured by zsh-newuser-install
 
-eval "$(oh-my-posh --init --shell zsh --config /home/bytientdavid/Source/dotfiles/myposh.omp.json)"
+eval "$(oh-my-posh --init --shell zsh --config $HOME/Source/dotfiles/myposh.omp.json)"
 
-source /home/bytientdavid/Source/ls_colors/lscolors.sh
+source $HOME/Source/ls_colors/lscolors.sh
 alias ls='ls --color=auto'
 
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-# alias luamake=/home/bytientdavid/Downloads/lua-language-server/3rd/luamake/luamake
+# alias luamake=$HOME/Downloads/lua-language-server/3rd/luamake/luamake
 
 alias vim=nvim
 
