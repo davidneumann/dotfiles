@@ -1,0 +1,13 @@
+#!/bin/bash
+
+escrotum -s -r "~/Videos/%Y-%m-%d-%H%M%S_$wx$h.webm" > /dev/null & p1=$!
+# echo "Saving $p1 to /tmp/record.pid"
+# echo $p1 >> /tmp/record.pid
+echo -e '^c#FF0000^  ^d^'> /tmp/record.pid
+# cat /tmp/record.pid
+# echo "Waiting for record to finish"
+wait $p1
+# echo "Record exited"
+# rm /tmp/record.pid
+echo "" > /tmp/record.pid
+
