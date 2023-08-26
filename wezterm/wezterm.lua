@@ -32,6 +32,23 @@ config.hide_tab_bar_if_only_one_tab = true
 
 config.color_scheme = 'tokyonight_night'
 
+local launch_menu = {}
+if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+  config.default_domain = 'WSL:Ubuntu'
+  config.keys = {
+    { key = 'l', mods = 'ALT', action = wezterm.action.ShowLauncher },
+  }
+  config.font = wezterm.font "MesloLGM NF"
+
+  table.insert(launch_menu, {
+    label = 'PowerShell',
+    args = { 'powershell.exe', '-NoLogo' },
+    domain = { DomainName = "local" }
+  })
+end
+config.launch_menu = launch_menu
+
+
 
 -- and finally, return the configuration to wezterm
 return config
@@ -42,4 +59,5 @@ return config
 -- 	color_scheme = 'Batman',
 -- 	scrollback_lines = 3500,
 -- }
+
 
