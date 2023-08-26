@@ -1,0 +1,39 @@
+{
+  "app_specific_configuration_path": "$Env:USERPROFILE/applications.yaml",
+  "window_hiding_behaviour": "Cloak",
+  "cross_monitor_move_behaviour": "Insert",
+  "alt_focus_hack": true,
+  "default_workspace_padding": 2,
+  "default_container_padding": 4,
+  "border_width": 10,
+  "active_window_border": true,
+  "active_window_border_colours": {
+    "single": {
+      "r": 0,
+      "g": 165,
+      "b": 0
+    },
+    "stack": {
+      "r": 256,
+      "g": 165,
+      "b": 66
+    },
+    "monocle": {
+      "r": 255,
+      "g": 51,
+      "b": 153
+    }
+  },
+  "custom_layout": "$Env:USERPROFILE/custom.json",
+  "layout": "UltrawideVerticalStack",
+  "monitors": [
+    {
+      "workspaces": [
+        {
+          "name": "personal",
+          "custom_layout": "C:/Users/david/custom.json"
+        }
+      ]
+    }
+  ]
+}

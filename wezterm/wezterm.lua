@@ -36,13 +36,14 @@ local launch_menu = {}
 if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
   config.default_domain = 'WSL:Ubuntu'
   config.keys = {
-    { key = 'l', mods = 'ALT', action = wezterm.action.ShowLauncher },
+    { key = 'm', mods = 'ALT', action = wezterm.action.ShowLauncher },
   }
   config.font = wezterm.font "MesloLGM NF"
 
   table.insert(launch_menu, {
-    label = 'PowerShell',
-    args = { 'powershell.exe', '-NoLogo' },
+    label = 'PowerShell 7',
+    args = { 'pwsh.exe', '-NoLogo' },
+    -- "C:\Program Files\PowerShell\7\pwsh.exe" -WorkingDirectory ~
     domain = { DomainName = "local" }
   })
 end
