@@ -47,7 +47,7 @@ cd $env:LOCALAPPDATA\Programs\oh-my-posh\bin
 Set-Location $currentDirectory
 
 # IDK part 1
-mkdir (Split-Path $PROFILE)
+md -Force (Split-Path $PROFILE)
 cp windows\profile.ps1 $PROFILE
 
 # IDK part 2
