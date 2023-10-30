@@ -2,7 +2,7 @@
 $color_scheme = Get-Content "color_scheme.json" | Out-String | ConvertFrom-Json
 
 echo "Adding scheme $($color_scheme.name) to terminal colors"
-$settingLocations = @('%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json', 
+$settingLocations = @('%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json',
 	'%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json',
 	'%LOCALAPPDATA%\Microsoft\Windows Terminal\settings.json',
 	"$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json")
@@ -10,11 +10,12 @@ $settingLocations = @('%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3
 function Add-Color {
 	param ($Path)
 	$jsonfile = $Path
+	echo "Updating $jsonfile"
 
 	$json = Get-Content $jsonfile | Out-String | ConvertFrom-Json
 
 	#Add color scheme
-	$current = $json.schemes | Where-Object -Property name -EQ $color_scheme.name 
+	$current = $json.schemes | Where-Object -Property name -EQ $color_scheme.name
 	if ($current) {
 		$json.schemes = @($json.schemes | ForEach-Object -Process {
 			if ($_.name -eq $color_scheme.name) {
