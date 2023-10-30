@@ -33,4 +33,6 @@
 
 # Linux
 
-idk lol
+1. Run `./install`
+
+2. Follow the resulting instructions
