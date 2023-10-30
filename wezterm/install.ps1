@@ -15,7 +15,7 @@ Get-ChildItem -Path "$env:USERPROFILE\.config\wezterm" -Include "*.lua" -Recurse
 function Start-ElevatedPS {
     param([ScriptBlock]$code)
 
-    Start-Process -FilePath powershell.exe -Verb RunAs -ArgumentList "-noexit", $code
+    Start-Process -FilePath powershell.exe -Verb RunAs -ArgumentList $code
     Write-Host $code
 }
 
@@ -33,7 +33,7 @@ foreach ($luaFile in $luaFiles) {
     $code = {
         param($symlinkPath, $test);
         Write-Host ":New-Item -Path $symlinkPath -ItemType SymbolicLink -Target $test"
-        Start-Process -FilePath powershell.exe -Verb RunAs -ArgumentList "-noexit", "New-Item -ItemType SymbolicLink -Path $symlinkPath -Target $test"
+        Start-Process -FilePath powershell.exe -Verb RunAs -ArgumentList "New-Item -ItemType SymbolicLink -Path $symlinkPath -Target $test"
     }
     Invoke-Command $code -ArgumentList $symlinkPath, $test
     # Start-ElevatedPS {

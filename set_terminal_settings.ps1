@@ -40,7 +40,7 @@ function Add-Color {
 	})
 
 	#Set font
-	$json.profiles.defaults | Add-Member -NotePropertyName fontFace -NotePropertyValue "MesloLGM NF" -Force
+	$json.profiles.defaults | Add-Member -NotePropertyName fontFace -NotePropertyValue "MesloLGM Nerd Font" -Force
 
 	$json | ConvertTo-Json -Depth 100 | Set-Content $Path
 }
