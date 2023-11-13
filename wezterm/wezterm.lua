@@ -52,6 +52,8 @@ config.launch_menu = launch_menu
 -- Cool trick to figure out why wezterm is closing on exit when WSL breaks
 -- config.exit_behavior = "CloseOnCleanExit"
 
+config.allow_win32_input_mode = false
+
 -- and finally, return the configuration to wezterm
 return config
 
