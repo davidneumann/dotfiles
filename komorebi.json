@@ -6,6 +6,7 @@
   "default_workspace_padding": 2,
   "default_container_padding": 4,
   "border_width": 10,
+  "active_window_border_width": 10,
   "active_window_border": true,
   "active_window_border_colours": {
     "single": {
