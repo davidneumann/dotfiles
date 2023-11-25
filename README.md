@@ -13,9 +13,9 @@
 
 - `.\install.ps1`
 
-5. Go clone [lazyvim](https://github.com/davidneumann/lazyvim-setup) to `%appdata%\local\nvim`
+5. Go clone [nvim dotfiles](https://github.com/davidneumann/kickstart.nvim) to `%appdata%\local\nvim`
 
-- `git clone https://github.com/davidneumann/lazyvim-setup.git $Env:LOCALAPPDATA\nvim`
+- `git clone https://github.com/davidneumann/kickstart.nvim.git $Env:LOCALAPPDATA\nvim`
 
 6. Install neovim
 
