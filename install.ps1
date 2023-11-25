@@ -66,6 +66,7 @@ cp windows\profile.ps1 $PROFILE
 scoop bucket add main
 scoop install neovim
 scoop install extras/vcredist2022
+scoop install zig
 
 # Install WSL
 wsl --install
