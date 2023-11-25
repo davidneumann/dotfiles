@@ -57,3 +57,12 @@ cp windows\profile.ps1 $PROFILE
 
 # IDK part 2
 ./set_terminal_settings.ps1
+
+# Install neovim
+scoop bucket add main
+scoop install neovim
+scoop install extras/vcredist2022
+
+# Install WSL
+wsl --install
+
