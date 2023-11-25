@@ -2,8 +2,8 @@
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional: Needed to run a remote script the first time
 irm get.scoop.sh | iex
 
-# Install git
-winget install --id Git.Git -e --source winget
+# # Install git
+# winget install --id Git.Git -e --source winget
 
 # Wezterm
 scoop bucket add extras
