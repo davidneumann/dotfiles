@@ -1,0 +1,18 @@
+[
+    {
+        "column": "Secondary",
+        "configuration": {
+            "Horizontal": 1
+        }
+    },
+    {
+        "column": "Primary",
+        "configuration": {
+            "WidthPercentage": 50
+        }
+    },
+    {
+        "column": "Tertiary",
+        "configuration": "Horizontal"
+    }
+]
