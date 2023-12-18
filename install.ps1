@@ -67,6 +67,7 @@ scoop bucket add main
 scoop install neovim
 scoop install extras/vcredist2022
 scoop install zig
+scoop install nodejs-lts
 
 # Install WSL
 wsl --install
