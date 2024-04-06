@@ -56,7 +56,6 @@ setopt hist_ignoredups
 # Per directory history
 source ~/.config/zsh/per-directory-history.zsh
 
-<<<<<<< HEAD
 # pnpm
 export PNPM_HOME="/home/david/.local/share/pnpm"
 case ":$PATH:" in
@@ -76,9 +75,7 @@ if [ -f '/home/david/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-=======
 if command -v ng &> /dev/null; then
   # Load Angular CLI autocompletion.
   source <(ng completion script)
 fi
->>>>>>> 76fec64 (Add angular zshrc stuff)
