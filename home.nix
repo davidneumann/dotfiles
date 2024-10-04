@@ -3,6 +3,9 @@ let
   homeDir = builtins.getEnv "HOME";
 in
 {
+  xdg.mime.enable = true;
+  targets.genericLinux.enable = true;
+
   # Allow unfree
   nixpkgs.config.allowUnfree = true;
 
@@ -20,15 +23,28 @@ in
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
+  programs.neovim = {
+    enable = true;
+    withNodeJs = true;
+  };
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    pkgs.neovim
+    # pkgs.neovim
+    pkgs.lua-language-server
+    pkgs.fzf
+    pkgs.ripgrep
+    pkgs.unzip
+    pkgs.go
+    pkgs.zig
     pkgs.vim
     pkgs.google-chrome
     pkgs.wezterm
     pkgs.obsidian
+    pkgs.lazygit
+    pkgs.yazi
+    pkgs.nodejs
 
     pkgs.noto-fonts
     pkgs.noto-fonts-cjk
@@ -64,6 +80,12 @@ in
   home.file = {
     ".config/wezterm/wezterm.lua".source = "${homeDir}/system/dotfiles/wezterm/wezterm.lua";
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${homeDir}/system/nvim-2025";
+    ".zshrc".source = "${homeDir}/system/dotfiles/zsh/zshrc";
+    ".xprofile".source = "${homeDir}/system/dotfiles/xprofile";
+    ".config/zsh/per-directory-history.zsh".source = "${homeDir}/system/dotfiles/zsh/per-directory-history.zsh";
+    ".config/tmux/tmux.conf".source = "${homeDir}/system/dotfiles/tmuxconf/tmux.conf";
+    ".config/tmux/tmux-cht-languages".source = "${homeDir}/system/dotfiles/tmuxconf/tmux-cht-languages";
+    ".config/tmux/tmux-cht-command".source = "${homeDir}/system/dotfiles/tmuxconf/tmux-cht-command";
 
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
@@ -75,6 +97,12 @@ in
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+  };
+
+  programs.oh-my-posh = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = builtins.fromJSON (builtins.unsafeDiscardStringContext (builtins.readFile "${homeDir}/system/dotfiles/myposh.omp.json"));
   };
 
   # Home Manager can also manage your environment variables through
@@ -100,5 +128,5 @@ in
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-
+  programs.bash.enable = true;
 }
