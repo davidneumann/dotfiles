@@ -11,6 +11,9 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
+-- Nixos fix. TODO: Remove when safe
+config.front_end = "WebGpu"
+
 config.window_padding = {
 	left = 0,
 	right = 0,

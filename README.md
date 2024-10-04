@@ -1,3 +1,11 @@
+# Nix home manager
+```bash
+ln -s "$(pwd)/home.nix" ~/.config/home-manager/home.nix
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --update
+nix-shell '<home-manager>' -A install
+```
+
 # Windows
 
 1. [Install scoop](https://scoop.sh/)
