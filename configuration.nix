@@ -4,13 +4,19 @@
 
 { config, lib, pkgs, ... }:
 
+let
+  homeDir = builtins.getEnv "HOME";
+in
 {
-
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
-      <home-manager/nixos>
+      # <home-manager/nixos>
     ];
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
 
   # # Use the systemd-boot EFI boot loader.
   # boot.loader.systemd-boot.enable = true;
@@ -44,7 +50,7 @@ boot.loader.grub.useOSProber = true;
   # services.xserver.enable = true;
 
 # Enable OpenGL
-  hardware.opengl = {
+  hardware.graphics= {
     enable = true;
   };
 
@@ -112,28 +118,28 @@ boot.loader.grub.useOSProber = true;
   users.users.david.isNormalUser = true;
   users.users.david.extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
 
-  home-manager.users.david = {
-    home.packages = [ pkgs.home-manager ];
-    # isNormalUser = true;
-    # extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    # dconf.settings = {
-    # 	"org/gnome/desktop/interface" = {
-    #     color-scheme = "prefer-dark";
-    #   };
-    # };
-    # The state version is required and should stay at the version you
-    # originally installed.
-    home.stateVersion = "24.05";
-	#    packages = with pkgs; [
-	# discord
-	# dmenu
-	# google-chrome
-	# wezterm
-	# obsidian
-	#      # firefox
-	#      # tree
-	#    ];
-  };
+	#  home-manager.users.david = {
+	#    home.packages = [ pkgs.home-manager ];
+	#    # isNormalUser = true;
+	#    # extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+	#    # dconf.settings = {
+	#    # 	"org/gnome/desktop/interface" = {
+	#    #     color-scheme = "prefer-dark";
+	#    #   };
+	#    # };
+	#    # The state version is required and should stay at the version you
+	#    # originally installed.
+	#    home.stateVersion = "24.05";
+	# #    packages = with pkgs; [
+	# # discord
+	# # dmenu
+	# # google-chrome
+	# # wezterm
+	# # obsidian
+	# #      # firefox
+	# #      # tree
+	# #    ];
+	#  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -145,6 +151,11 @@ boot.loader.grub.useOSProber = true;
     neovim
     xclip
     git
+    xautolock
+    slock
+    slstatus
+    xsel
+    pasystray
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -193,22 +204,25 @@ boot.loader.grub.useOSProber = true;
    # programs.sway.enable = true;
    services.xserver.displayManager.lightdm.enable = true;
    services.xserver.enable = true;
-   services.xserver.desktopManager.gnome.enable = true;
-   # services.xserver.windowManager.i3.enable = true;
+   # services.xserver.desktopManager.gnome.enable = true;
+   services.xserver.windowManager.dwm.enable = true;
+   services.xserver.windowManager.dwm.package = pkgs.dwm.overrideAttrs {
+     src =  /. + "${homeDir}/system/dotfiles/suckless/dwm";
+   };
    hardware.graphics.enable32Bit = true;
 
-   fonts.packages = with pkgs; [
-  # noto-fonts
-  # noto-fonts-cjk
-  # noto-fonts-emoji
-  # liberation_ttf
-  # fira-code
-  # fira-code-symbols
-  # mplus-outline-fonts.githubRelease
-  # dina-font
-  # proggyfonts
-  # (nerdfonts.override { fonts = [ "Meslo" ]; })
-];
+#    fonts.packages = with pkgs; [
+#   noto-fonts
+#   noto-fonts-cjk
+#   noto-fonts-emoji
+#   liberation_ttf
+#   fira-code
+#   fira-code-symbols
+#   mplus-outline-fonts.githubRelease
+#   dina-font
+#   proggyfonts
+#   (nerdfonts.override { fonts = [ "Meslo" ]; })
+# ];
 
   fonts.enableDefaultPackages = true;
   fonts.enableGhostscriptFonts = true;
@@ -223,7 +237,7 @@ boot.loader.grub.useOSProber = true;
 
   # Styling
   fonts = {
-    fonts = with pkgs; [
+    packages = with pkgs; [
       noto-fonts
 	noto-fonts-emoji
     ];
@@ -246,4 +260,14 @@ boot.loader.grub.useOSProber = true;
       };
     };
   };
+
+    nixpkgs.overlays = [
+      (final: prev: {
+	slstatus = prev.slstatus.overrideAttrs (old: { src = /. + "${homeDir}/system/dotfiles/suckless/slstatus";});
+      })
+      (final: prev: {
+	slock = prev.slock.overrideAttrs (old: { src = /. + "${homeDir}/system/dotfiles/suckless/slock";
+	buildInputs = old.buildInputs ++ [ pkgs.xorg.libXinerama pkgs.imlib2 ];});
+      })
+    ];
 }
