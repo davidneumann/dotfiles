@@ -1,0 +1,12 @@
+[[search_dirs]]
+path = "/home/david/Source"
+depth = 1
+
+[[search_dirs]]
+path = "/home/david/system"
+depth = 1
+
+[[search_dirs]]
+path = "/home/david/Source2"
+depth = 2
+

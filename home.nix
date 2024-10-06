@@ -3,8 +3,21 @@ let
   homeDir = builtins.getEnv "HOME";
 in
 {
+  imports = [
+    ../nvim-nix/nix
+    ./tmux.nix
+  ];
+
   xdg.mime.enable = true;
   targets.genericLinux.enable = true;
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+  };
 
   # Allow unfree
   nixpkgs.config.allowUnfree = true;
@@ -79,13 +92,14 @@ in
   # plain files is through 'home.file'.
   home.file = {
     ".config/wezterm/wezterm.lua".source = "${homeDir}/system/dotfiles/wezterm/wezterm.lua";
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${homeDir}/system/nvim-2025";
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${homeDir}/system/nvim-nix/nvim";
     ".zshrc".source = "${homeDir}/system/dotfiles/zsh/zshrc";
     ".xprofile".source = "${homeDir}/system/dotfiles/xprofile";
     ".config/zsh/per-directory-history.zsh".source = "${homeDir}/system/dotfiles/zsh/per-directory-history.zsh";
-    ".config/tmux/tmux.conf".source = "${homeDir}/system/dotfiles/tmuxconf/tmux.conf";
+    # ".config/tmux/tmux.conf".source = "${homeDir}/system/dotfiles/tmuxconf/tmux.conf";
     ".config/tmux/tmux-cht-languages".source = "${homeDir}/system/dotfiles/tmuxconf/tmux-cht-languages";
     ".config/tmux/tmux-cht-command".source = "${homeDir}/system/dotfiles/tmuxconf/tmux-cht-command";
+    ".config/nvim-old".source = config.lib.file.mkOutOfStoreSymlink "${homeDir}/system/nvim-2025";
 
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
@@ -102,7 +116,9 @@ in
   programs.oh-my-posh = {
     enable = true;
     enableZshIntegration = true;
-    settings = builtins.fromJSON (builtins.unsafeDiscardStringContext (builtins.readFile "${homeDir}/system/dotfiles/myposh.omp.json"));
+    settings = builtins.fromJSON (
+      builtins.unsafeDiscardStringContext (builtins.readFile "${homeDir}/system/dotfiles/myposh.omp.json")
+    );
   };
 
   # Home Manager can also manage your environment variables through

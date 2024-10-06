@@ -14,10 +14,6 @@ in
       # <home-manager/nixos>
     ];
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
-
   # # Use the systemd-boot EFI boot loader.
   # boot.loader.systemd-boot.enable = true;
   # boot.loader.efi.canTouchEfiVariables = true;
@@ -115,8 +111,46 @@ boot.loader.grub.useOSProber = true;
   nixpkgs.config.allowUnfree = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.david.isNormalUser = true;
-  users.users.david.extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+  # users.users.david.isNormalUser = true;
+  # users.users.david.extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+  users.users.david = {
+
+  isNormalUser = true;
+  extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+
+
+  };
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
+
+  programs.dconf = {
+    enable = true;
+    profiles.user.databases = [
+      {
+	settings = {
+	  # "org/gnome/desktop/background" = {
+	  #   picture-uri-dark = "file://${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.src}";
+	  # };
+	  "org/gnome/desktop/interface" = {
+	    color-scheme = "prefer-dark";
+	  };
+	};
+      }
+    ];
+  };
+
+  qt = {
+    enable = true;
+    platformTheme = "gnome";
+    style = "adwaita-dark";
+  };
+
+  # programs.dconf.enable = true;
 
 	#  home-manager.users.david = {
 	#    home.packages = [ pkgs.home-manager ];
@@ -143,20 +177,23 @@ boot.loader.grub.useOSProber = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+  # This is where the programs live
   environment.systemPackages = with pkgs; [
     discord
     dmenu
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
-    neovim
     xclip
     git
     xautolock
-    slock
     slstatus
     xsel
     pasystray
+    protontricks
+    wowup-cf
   ];
+
+  programs.slock.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
