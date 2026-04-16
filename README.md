@@ -13,6 +13,22 @@
 - `cd Source/dotfiles/ansible`
 - `ansible-playbook site.yml`
 
+# Linux (Arch / Ubuntu)
+
+1. Install Ansible
+
+- Arch: `sudo pacman -S ansible`
+- Ubuntu: `sudo apt install ansible`
+
+2. Clone repo
+
+- `git clone https://github.com/davidneumann/dotfiles Source/dotfiles`
+
+3. Run the playbook
+
+- `cd Source/dotfiles/ansible`
+- `ansible-playbook site.yml`
+
 # Nix home manager
 ```bash
 ln -s "$(pwd)/home.nix" ~/.config/home-manager/home.nix

@@ -5,7 +5,7 @@
     file_type: file
   register: system_scripts
 
-- name: Symlink system scripts to /usr/local/bin
+- name: Symlink system scripts to /usr/local/bin (macOS)
   file:
     src: "{{ item }}"
     dest: "/usr/local/bin/{{ item | basename }}"
@@ -13,3 +13,19 @@
     force: true
   loop: "{{ system_scripts.files | map(attribute='path') | list }}"
   become: true
+  when: ansible_facts['system'] == 'Darwin'
+
+- name: Create ~/.local/bin (Linux)
+  file:
+    path: "{{ home }}/.local/bin"
+    state: directory
+  when: ansible_facts['system'] == 'Linux'
+
+- name: Symlink system scripts to ~/.local/bin (Linux)
+  file:
+    src: "{{ item }}"
+    dest: "{{ home }}/.local/bin/{{ item | basename }}"
+    state: link
+    force: true
+  loop: "{{ system_scripts.files | map(attribute='path') | list }}"
+  when: ansible_facts['system'] == 'Linux'

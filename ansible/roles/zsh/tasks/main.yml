@@ -30,6 +30,7 @@
     repo: https://github.com/scriptingosx/mac-zsh-completions.git
     dest: "{{ dotfiles_dir }}/deps/mac-zsh-completions"
     depth: 1
+  when: ansible_facts['system'] == 'Darwin'
 
 - name: Clone LS_COLORS
   git:

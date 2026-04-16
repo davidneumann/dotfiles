@@ -1,13 +1,42 @@
 ---
-- name: Install Go
+- name: Install Go (macOS)
   community.general.homebrew:
     name: go
     state: present
+  when: ansible_facts['system'] == 'Darwin'
 
-- name: Install fnm
+- name: Install Go (Arch Linux)
+  community.general.pacman:
+    name: go
+    state: present
+  become: true
+  when: ansible_facts['distribution'] == 'Archlinux'
+
+- name: Install Go (Ubuntu)
+  apt:
+    name: golang-go
+    state: present
+  become: true
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
+- name: Install fnm (macOS)
   community.general.homebrew:
     name: fnm
     state: present
+  when: ansible_facts['system'] == 'Darwin'
+
+- name: Install fnm (Arch Linux)
+  community.general.pacman:
+    name: fnm
+    state: present
+  become: true
+  when: ansible_facts['distribution'] == 'Archlinux'
+
+- name: Install fnm (Ubuntu)
+  ansible.builtin.shell: curl -fsSL https://fnm.vercel.app/install | bash
+  args:
+    creates: "{{ home }}/.local/share/fnm/fnm"
+  when: ansible_facts['distribution'] == 'Ubuntu'
 
 - name: Check if fnm has installed any Node version
   command: fnm list

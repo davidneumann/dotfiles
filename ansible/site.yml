@@ -1,5 +1,5 @@
 ---
-- name: Setup macOS workstation
+- name: Setup workstation
   hosts: localhost
   connection: local
   gather_facts: true
@@ -9,15 +9,17 @@
     dotfiles_dir: "{{ home }}/Source/dotfiles"
 
   roles:
-    - homebrew
+    - role: homebrew
+      when: ansible_facts['system'] == 'Darwin'
     - core_utils
     - git
     - zsh
     - oh-my-posh
     - tmux
     - wezterm
-    # `- zellij
+    # - zellij
     - nvim
     - dev_tools
     # - bin
-    - macos_defaults
+    - role: macos_defaults
+      when: ansible_facts['system'] == 'Darwin'
