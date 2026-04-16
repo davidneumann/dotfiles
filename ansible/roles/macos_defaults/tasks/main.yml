@@ -1,0 +1,12 @@
+---
+# - name: Enable subpixel antialiasing
+#   command: defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
+#   changed_when: false
+
+# - name: Set font smoothing level
+#   command: defaults -currentHost write -globalDomain AppleFontSmoothing -int 2
+#   changed_when: false
+
+- name: Enable Ctrl+Cmd+Click window drag
+  command: defaults write -g NSWindowShouldDragOnGesture -bool true
+  changed_when: false

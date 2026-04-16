@@ -1,0 +1,12 @@
+---
+- name: Create wezterm config directory
+  file:
+    path: "{{ home }}/.config/wezterm"
+    state: directory
+
+- name: Symlink wezterm config
+  file:
+    src: "{{ dotfiles_dir }}/wezterm/wezterm.lua"
+    dest: "{{ home }}/.config/wezterm/wezterm.lua"
+    state: link
+    force: true

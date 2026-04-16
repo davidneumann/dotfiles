@@ -1,0 +1,26 @@
+---
+- name: Clone TPM (Tmux Plugin Manager)
+  git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: "{{ home }}/.tmux/plugins/tpm"
+    depth: 1
+
+- name: Create tmux config directory
+  file:
+    path: "{{ home }}/.config/tmux"
+    state: directory
+
+- name: Symlink tmux config files
+  file:
+    src: "{{ dotfiles_dir }}/tmuxconf/{{ item }}"
+    dest: "{{ home }}/.config/tmux/{{ item }}"
+    state: link
+    force: true
+  loop:
+    - tmux.conf
+    - tmux-cht-command
+    - tmux-cht-languages
+
+- name: Install tmux plugins
+  command: "{{ home }}/.tmux/plugins/tpm/bin/install_plugins"
+  changed_when: false

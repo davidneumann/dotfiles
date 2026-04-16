@@ -1,0 +1,23 @@
+---
+- name: Install core utilities
+  community.general.homebrew:
+    name:
+      - git
+      - tmux
+      - neovim
+      - fzf
+      - ripgrep
+      - fd
+      - node
+      - zellij
+      - lazygit
+      - yazi
+    state: present
+
+- name: Install cask applications
+  community.general.homebrew_cask:
+    name:
+      - wezterm
+      - iterm2
+      - font-meslo-lg-nerd-font
+    state: present

@@ -1,0 +1,32 @@
+---
+- name: Backup existing .zshrc
+  copy:
+    src: "{{ home }}/.zshrc"
+    dest: "{{ home }}/.zshrc.back"
+    remote_src: true
+  when: (home ~ '/.zshrc') is file
+
+- name: Symlink .zshrc
+  file:
+    src: "{{ dotfiles_dir }}/zsh/zshrc"
+    dest: "{{ home }}/.zshrc"
+    state: link
+    force: true
+
+- name: Create zsh config directory
+  file:
+    path: "{{ home }}/.config/zsh"
+    state: directory
+
+- name: Symlink per-directory-history
+  file:
+    src: "{{ dotfiles_dir }}/zsh/per-directory-history.zsh"
+    dest: "{{ home }}/.config/zsh/per-directory-history.zsh"
+    state: link
+    force: true
+
+- name: Clone mac-zsh-completions
+  git:
+    repo: https://github.com/scriptingosx/mac-zsh-completions.git
+    dest: "{{ dotfiles_dir }}/deps/mac-zsh-completions"
+    depth: 1

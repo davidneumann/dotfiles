@@ -1,0 +1,15 @@
+---
+- name: Find executable system scripts
+  find:
+    paths: "{{ dotfiles_dir }}/bin/system"
+    file_type: file
+  register: system_scripts
+
+- name: Symlink system scripts to /usr/local/bin
+  file:
+    src: "{{ item }}"
+    dest: "/usr/local/bin/{{ item | basename }}"
+    state: link
+    force: true
+  loop: "{{ system_scripts.files | map(attribute='path') | list }}"
+  become: true

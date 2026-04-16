@@ -1,0 +1,14 @@
+---
+- name: Symlink .gitignore
+  file:
+    src: "{{ dotfiles_dir }}/gitconfig/gitignore"
+    dest: "{{ home }}/.gitignore"
+    state: link
+    force: true
+
+- name: Symlink .gitconfig
+  file:
+    src: "{{ dotfiles_dir }}/gitconfig/gitconfig"
+    dest: "{{ home }}/.gitconfig"
+    state: link
+    force: true

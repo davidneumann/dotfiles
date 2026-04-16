@@ -1,0 +1,27 @@
+---
+- name: Create zellij config directory
+  file:
+    path: "{{ home }}/.config/zellij"
+    state: directory
+
+- name: Symlink zellij config
+  file:
+    src: "{{ dotfiles_dir }}/zellij/config.kdl"
+    dest: "{{ home }}/.config/zellij/config.kdl"
+    state: link
+    force: true
+
+- name: Create zellij plugins directory
+  file:
+    path: "{{ home }}/.config/zellij/plugins"
+    state: directory
+
+- name: Download zellij-choose-tree plugin
+  get_url:
+    url: https://github.com/laperlej/zellij-choose-tree/releases/latest/download/zellij-choose-tree.wasm
+    dest: "{{ home }}/.config/zellij/plugins/zellij-choose-tree.wasm"
+
+- name: Download zellij-sessionizer plugin
+  get_url:
+    url: https://github.com/laperlej/zellij-sessionizer/releases/latest/download/zellij-sessionizer.wasm
+    dest: "{{ home }}/.config/zellij/plugins/zellij-sessionizer.wasm"

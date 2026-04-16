@@ -1,0 +1,22 @@
+---
+- name: Setup macOS workstation
+  hosts: localhost
+  connection: local
+  gather_facts: true
+
+  vars:
+    home: "{{ ansible_facts['env']['HOME'] }}"
+    dotfiles_dir: "{{ home }}/Source/dotfiles"
+
+  roles:
+    - homebrew
+    - core_utils
+    - git
+    - zsh
+    # - oh-my-posh
+    - tmux
+    - wezterm
+    # `- zellij
+    - nvim
+    # - bin
+    - macos_defaults
