@@ -1,31 +1,27 @@
 ---
-- name: Find executable system scripts
-  find:
-    paths: "{{ dotfiles_dir }}/bin/system"
-    file_type: file
-  register: system_scripts
-
-- name: Symlink system scripts to /usr/local/bin (macOS)
-  file:
-    src: "{{ item }}"
-    dest: "/usr/local/bin/{{ item | basename }}"
-    state: link
-    force: true
-  loop: "{{ system_scripts.files | map(attribute='path') | list }}"
-  become: true
-  when: ansible_facts['system'] == 'Darwin'
-
-- name: Create ~/.local/bin (Linux)
+- name: Create ~/.local/bin
   file:
     path: "{{ home }}/.local/bin"
     state: directory
-  when: ansible_facts['system'] == 'Linux'
 
-- name: Symlink system scripts to ~/.local/bin (Linux)
+- name: Find executable local scripts
+  find:
+    paths:
+      - "{{ dotfiles_dir }}/bin/local/bin"
+      - "{{ dotfiles_dir }}/bin/local/scripts"
+    file_type: file
+  register: local_scripts
+
+- name: Symlink local scripts to ~/.local/bin
   file:
     src: "{{ item }}"
     dest: "{{ home }}/.local/bin/{{ item | basename }}"
     state: link
     force: true
-  loop: "{{ system_scripts.files | map(attribute='path') | list }}"
-  when: ansible_facts['system'] == 'Linux'
+  loop: "{{ local_scripts.files | map(attribute='path') | list }}"
+
+- name: Add ~/.local/bin to PATH in zshrc
+  lineinfile:
+    path: "{{ home }}/.zshrc"
+    line: 'export PATH="$HOME/.local/bin:$PATH"'
+    create: true

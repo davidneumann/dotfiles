@@ -81,3 +81,4 @@ if command -v ng &> /dev/null; then
 fi
 
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/zen.toml)"
+export PATH="$HOME/.local/bin:$PATH"

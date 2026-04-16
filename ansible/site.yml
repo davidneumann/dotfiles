@@ -20,6 +20,6 @@
     # - zellij
     - nvim
     - dev_tools
-    # - bin
+    - bin
     - role: macos_defaults
       when: ansible_facts['system'] == 'Darwin'
