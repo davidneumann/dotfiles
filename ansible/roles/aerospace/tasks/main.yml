@@ -1,0 +1,14 @@
+---
+- name: Install AeroSpace via Homebrew
+  homebrew_cask:
+    name: nikitabobko/tap/aerospace
+    state: present
+
+- name: Check if AeroSpace is in login items
+  command: osascript -e 'tell application "System Events" to get the name of every login item'
+  register: login_items
+  changed_when: false
+
+- name: Add AeroSpace to login items
+  command: osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/AeroSpace.app", hidden:false}'
+  when: "'AeroSpace' not in login_items.stdout"

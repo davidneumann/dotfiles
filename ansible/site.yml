@@ -23,3 +23,5 @@
     - bin
     - role: macos_defaults
       when: ansible_facts['system'] == 'Darwin'
+    - role: aerospace
+      when: ansible_facts['system'] == 'Darwin'
