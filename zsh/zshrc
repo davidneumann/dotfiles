@@ -25,7 +25,7 @@ bindkey "^[[1;5D" backward-word
 
 # End of lines configured by zsh-newuser-install
 
-eval "$(oh-my-posh --init --shell zsh --config $HOME/Source/dotfiles/myposh.omp.json)"
+eval "$(fnm env --use-on-cd --shell zsh)"
 
 source $HOME/Source/ls_colors/lscolors.sh
 alias ls='ls --color=auto'
@@ -79,3 +79,5 @@ if command -v ng &> /dev/null; then
   # Load Angular CLI autocompletion.
   source <(ng completion script)
 fi
+
+eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/zen.toml)"

@@ -8,11 +8,20 @@
       - fzf
       - ripgrep
       - fd
-      - node
       - zellij
       - lazygit
       - yazi
     state: present
+
+- name: Check if opencode is already installed
+  ansible.builtin.command: which opencode
+  register: opencode_check
+  failed_when: false
+  changed_when: false
+
+- name: Install opencode via install script
+  ansible.builtin.shell: curl -fsSL https://opencode.ai/install | bash
+  when: opencode_check.rc != 0
 
 - name: Install cask applications
   community.general.homebrew_cask:

@@ -1,0 +1,26 @@
+---
+- name: Install Go
+  community.general.homebrew:
+    name: go
+    state: present
+
+- name: Install fnm
+  community.general.homebrew:
+    name: fnm
+    state: present
+
+- name: Check if fnm has installed any Node version
+  command: fnm list
+  register: fnm_list
+  changed_when: false
+  failed_when: false
+
+- name: Install latest Node via fnm
+  command: fnm install --latest
+  when: fnm_list.stdout is not search('v\\d+\\.\\d+\\.\\d+')
+
+- name: Add fnm env to zshrc
+  lineinfile:
+    path: "{{ home }}/.zshrc"
+    line: 'eval "$(fnm env --use-on-cd --shell zsh)"'
+    create: true

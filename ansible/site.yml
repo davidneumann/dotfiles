@@ -13,10 +13,11 @@
     - core_utils
     - git
     - zsh
-    # - oh-my-posh
+    - oh-my-posh
     - tmux
     - wezterm
     # `- zellij
     - nvim
+    - dev_tools
     # - bin
     - macos_defaults

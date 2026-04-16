@@ -30,3 +30,9 @@
     repo: https://github.com/scriptingosx/mac-zsh-completions.git
     dest: "{{ dotfiles_dir }}/deps/mac-zsh-completions"
     depth: 1
+
+- name: Clone LS_COLORS
+  git:
+    repo: https://github.com/trapd00r/LS_COLORS.git
+    dest: "{{ home }}/Source/ls_colors"
+    depth: 1

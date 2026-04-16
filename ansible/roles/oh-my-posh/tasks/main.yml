@@ -8,15 +8,15 @@
     name: oh-my-posh
     state: present
 
-- name: Symlink oh-my-posh theme
+- name: Symlink oh-my-posh config directory
   file:
-    src: "{{ dotfiles_dir }}/myposh.omp.json"
-    dest: "{{ home }}/myposh.omp.json"
+    src: "{{ dotfiles_dir }}/ohmyposh"
+    dest: "{{ home }}/.config/ohmyposh"
     state: link
     force: true
 
 - name: Add oh-my-posh init to zshrc
   lineinfile:
     path: "{{ home }}/.zshrc"
-    line: 'eval "$(oh-my-posh --init --shell zsh --config ~/myposh.omp.json)"'
+    line: 'eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/zen.toml)"'
     create: true

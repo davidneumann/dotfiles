@@ -3,3 +3,4 @@
   git:
     repo: git@github.com:davidneumann/nvim-2025.git
     dest: "{{ home }}/.config/nvim"
+    update: no
