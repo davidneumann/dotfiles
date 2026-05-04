@@ -19,6 +19,7 @@
     - wezterm
     # - zellij
     - nvim
+    - opencode
     - dev_tools
     - bin
     - role: macos_defaults

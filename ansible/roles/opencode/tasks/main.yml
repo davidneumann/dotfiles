@@ -1,0 +1,13 @@
+---
+- name: Check if opencode config exists
+  stat:
+    path: "{{ home }}/.config/opencode"
+  register: opencode_config
+
+- name: Symlink opencode config
+  file:
+    src: "{{ dotfiles_dir }}/opencode"
+    dest: "{{ home }}/.config/opencode"
+    state: link
+    force: true
+  when: not opencode_config.stat.exists or opencode_config.stat.islnk
