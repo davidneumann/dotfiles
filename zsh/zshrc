@@ -82,3 +82,7 @@ fi
 
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/zen.toml)"
 export PATH="$HOME/.local/bin:$PATH"
+
+# opencode
+export PATH=$HOME/.opencode/bin:$PATH
+source "$HOME/.cargo/env"
