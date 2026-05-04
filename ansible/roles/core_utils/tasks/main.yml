@@ -68,7 +68,7 @@
   ansible.builtin.shell: >
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
     && RC_FILE="{{ ansible_env.HOME }}/{{ '.zshrc' if 'zsh' in ansible_env.SHELL else '.bashrc' }}"
-    && grep -qF 'cargo env' "$RC_FILE" 2>/dev/null
+    && grep -qF 'cargo/env' "$RC_FILE" 2>/dev/null
     || echo 'source "$HOME/.cargo/env"' >> "$RC_FILE"
   when: rustup_check.rc != 0
 
