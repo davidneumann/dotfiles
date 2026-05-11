@@ -72,13 +72,23 @@
     || echo 'source "$HOME/.cargo/env"' >> "$RC_FILE"
   when: rustup_check.rc != 0
 
+- name: Source cargo env
+  ansible.builtin.shell: source "{{ ansible_env.HOME }}/.cargo/env"
+  changed_when: false
+
+- name: Install cargo-binstall
+  ansible.builtin.shell: >
+    source "{{ ansible_env.HOME }}/.cargo/env"
+    && curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+  args:
+    creates: "{{ ansible_env.HOME }}/.cargo/bin/cargo-binstall"
+
 - name: Install cargo packages
-  community.general.cargo:
-    name:
-      - tmux-sessionizer
-    state: present
-  environment:
-    PATH: "{{ ansible_env.HOME }}/.cargo/bin:{{ ansible_env.PATH }}"
+  ansible.builtin.shell: >
+    source "{{ ansible_env.HOME }}/.cargo/env"
+    && cargo install tmux-sessionizer
+  args:
+    creates: "{{ ansible_env.HOME }}/.cargo/bin/tmux-sessionizer"
 
 - name: Install cask applications (macOS)
   community.general.homebrew_cask:

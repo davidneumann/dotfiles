@@ -53,3 +53,10 @@
     path: "{{ home }}/.zshrc"
     line: 'eval "$(fnm env --use-on-cd --shell zsh)"'
     create: true
+
+- name: Install tree-sitter via cargo binstall
+  ansible.builtin.shell: >
+    source "{{ ansible_env.HOME }}/.cargo/env"
+    && cargo binstall tree-sitter-cli -y
+  args:
+    creates: "{{ ansible_env.HOME }}/.cargo/bin/tree-sitter"
