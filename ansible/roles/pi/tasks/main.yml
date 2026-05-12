@@ -1,10 +1,57 @@
 ---
+- name: Ensure ~/.pi/agent directory exists
+  file:
+    path: "{{ home }}/.pi/agent"
+    state: directory
+    mode: "0700"
+
+- name: Check if pi settings.json exists
+  stat:
+    path: "{{ home }}/.pi/agent/settings.json"
+  register: pi_settings
+
+- name: Symlink pi settings.json
+  file:
+    src: "{{ dotfiles_dir }}/pi/settings.json"
+    dest: "{{ home }}/.pi/agent/settings.json"
+    state: link
+    force: true
+  when: not pi_settings.stat.exists or pi_settings.stat.islnk
+
+- name: Check if pi models.json exists
+  stat:
+    path: "{{ home }}/.pi/agent/models.json"
+  register: pi_models
+
+- name: Symlink pi models.json
+  file:
+    src: "{{ dotfiles_dir }}/pi/models.json"
+    dest: "{{ home }}/.pi/agent/models.json"
+    state: link
+    force: true
+  when: not pi_models.stat.exists or pi_models.stat.islnk
+
 - name: Check if pi is already installed
-  ansible.builtin.command: which pi
+  ansible.builtin.shell: command -v pi
   register: pi_check
   failed_when: false
   changed_when: false
 
-- name: Install pi via install script
-  ansible.builtin.shell: curl -fsSL https://pi.dev/install.sh | sh
+- name: Install pi via npm
+  ansible.builtin.shell: npm install -g @earendil-works/pi-coding-agent
   when: pi_check.rc != 0
+
+- name: Find pi binary location
+  ansible.builtin.shell: npm prefix -g
+  register: pi_bin_dir
+  changed_when: false
+
+- name: Read packages from settings.json
+  ansible.builtin.slurp:
+    src: "{{ dotfiles_dir }}/pi/settings.json"
+  register: pi_settings_json
+
+- name: Install pi packages
+  ansible.builtin.shell: "{{ pi_bin_dir.stdout }}/bin/pi install {{ item }}"
+  loop: "{{ (pi_settings_json.content | b64decode | from_json).get('packages', []) }}"
+  when: (pi_settings_json.content | b64decode | from_json).get('packages', []) | length > 0

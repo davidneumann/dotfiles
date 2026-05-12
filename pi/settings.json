@@ -1,0 +1,10 @@
+{
+  "defaultProvider": "zai-glm",
+  "defaultModel": "glm-5-turbo",
+  "packages": [
+    "npm:pi-zai-glm"
+  ],
+  "defaultThinkingLevel": "medium",
+  "lastChangelogVersion": "0.74.0",
+  "hideThinkingBlock": true
+}

@@ -1,0 +1,28 @@
+{
+  "providers": {
+    "omlx": {
+      "baseUrl": "http://192.168.1.167:8000/v1",
+      "api": "openai-completions",
+      "apiKey": "omlx-k3ef7j8nae789mxg",
+      "authHeader": true,
+      "models": [
+        {
+          "id": "GLM-4.7-Flash-MLX-8bit",
+          "name": "GLM-4.7-Flash-MLX-8bit",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "contextWindow": 156000,
+          "maxTokens": 200000
+        }
+      ]
+    }
+  }
+}
