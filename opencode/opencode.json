@@ -11,7 +11,7 @@
       "name": "oMLX",
       "options": {
         "baseURL": "http://192.168.1.167:8000/v1",
-        "apiKey": "omlx-k3ef7j8nae789mxg"
+        "apiKey": "{env:OMLX_API_KEY}"
       },
       "models": {
         "GLM-4.7-Flash-MLX-8bit": {
