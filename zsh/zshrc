@@ -86,3 +86,4 @@ export PATH="$HOME/.local/bin:$PATH"
 # opencode
 export PATH=$HOME/.opencode/bin:$PATH
 source "$HOME/.cargo/env"
+source "$HOME/.config/secrets.env"
