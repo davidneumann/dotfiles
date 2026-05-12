@@ -2,7 +2,8 @@
   "defaultProvider": "zai-glm",
   "defaultModel": "glm-5-turbo",
   "packages": [
-    "npm:pi-zai-glm"
+    "npm:pi-zai-glm",
+    "npm:@a5c-ai/babysitter-pi"
   ],
   "defaultThinkingLevel": "medium",
   "lastChangelogVersion": "0.74.0",
