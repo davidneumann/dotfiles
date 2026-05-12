@@ -1,0 +1,10 @@
+---
+- name: Check if pi is already installed
+  ansible.builtin.command: which pi
+  register: pi_check
+  failed_when: false
+  changed_when: false
+
+- name: Install pi via install script
+  ansible.builtin.shell: curl -fsSL https://pi.dev/install.sh | sh
+  when: pi_check.rc != 0

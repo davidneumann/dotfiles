@@ -20,6 +20,7 @@
     # - zellij
     - nvim
     - opencode
+    - pi
     - dev_tools
     - bin
     - role: macos_defaults
