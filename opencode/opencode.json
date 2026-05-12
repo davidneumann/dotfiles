@@ -1,0 +1,37 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "zai-coding-plan": {
+      "options": {
+        "apiKey": "e6ff2ea4845a450aba8fab7cb8e7c44e.wjoBhNtvOFVQTOqc"
+      }
+    },
+    "omlx": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "oMLX",
+      "options": {
+        "baseURL": "http://192.168.1.167:8000/v1",
+        "apiKey": "omlx-k3ef7j8nae789mxg"
+      },
+      "models": {
+        "GLM-4.7-Flash-MLX-8bit": {
+          "name": "GLM-4.7-Flash-MLX-8bit",
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "limit": {
+            "context": 156000,
+            "output": 200000
+          }
+        }
+      }
+    }
+  },
+  "model": "omlx/GLM-4.7-Flash-MLX-8bit",
+  "small_model": "zai-coding-plan/glm-4.5-air"
+}
