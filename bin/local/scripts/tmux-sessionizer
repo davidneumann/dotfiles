@@ -3,7 +3,18 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(fd . ~/Source/ ~/Source/dotfiles/ --max-depth 1 --type d | fzf)
+    extra_dirs=()
+    if [[ -f ~/.config/find_dirs ]]; then
+        while IFS= read -r line; do
+            # Skip empty lines and comments
+            [[ -z "$line" || "$line" == \#* ]] && continue
+            expanded="${line/#\~/$HOME}"
+            if [[ -d "$expanded" ]]; then
+                extra_dirs+=("$expanded")
+            fi
+        done < ~/.config/find_dirs
+    fi
+    selected=$(fd . ~/Source/ ~/Source/dotfiles/ "${extra_dirs[@]}" --max-depth 1 --type d | fzf)
 fi
 
 if [[ -z $selected ]]; then
