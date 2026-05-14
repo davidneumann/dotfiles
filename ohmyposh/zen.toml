@@ -10,6 +10,14 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   newline = true
 
   [[blocks.segments]]
+    type = 'session'
+    style = 'plain'
+    foreground = 'p:grey'
+    background = 'transparent'
+    template = '{{ .HostName }} '  
+
+
+  [[blocks.segments]]
     type = 'path'
     style = 'plain'
     background = 'transparent'
